@@ -1,8 +1,16 @@
 import { useState } from 'react';
+let x = false
 function Square() {
+  
   const [value, setValue] = useState(null);
   function handleClick() {
-    setValue('X');
+    if (!x) {
+      setValue('X');
+      x = true
+    } else {
+      setValue('O');
+      x = false
+    }
   }
   return <button className="square" onClick={handleClick}>{value}</button>;
 }
@@ -26,6 +34,10 @@ export default function Board() {
         <Square value={squares[7]} />
         <Square value={squares[8]} />
       </div>
+      <button onClick={()=>{
+        document.getElementsByClassName('square').innerHTML = '';
+        x = false
+      }}>RESET</button>
     </>
   )
 }
